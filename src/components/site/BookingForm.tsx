@@ -93,7 +93,15 @@ function RepairChoice({ repairs }: { repairs: BookingFormProps['repairs'] }) {
         // and add this line at the top of the file, under the other import lines:
         //   import { formatPrice } from '@/lib/format'
         // It reads each repair's own price, from the same record as the price list: nothing is copied.
-        const label = repair.name
+        let label = repair.name
+
+if (repair.name === 'Check') {
+  label = 'Check - A basic inspection to identify bicycle problems'
+} else if (repair.name === 'Each small repair') {
+  label = 'Each small repair - One minor fix, such as a brake adjustment'
+} else if (repair.name === 'Full service') {
+  label = 'Full service - A more complete bicycle check and maintenance'
+}
         return (
           <label key={repair.id} className="flex min-h-11 items-center gap-3">
             <input type="checkbox" name="repairs" value={repair.id} defaultChecked={sent.repairs?.includes(String(repair.id))} className="size-5 accent-ink" />
